@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FlickrApp</string>
+    <string name="main_btn_image">Get an image</string>
+    <string name="main_image_description">Image from Flickr</string>
+</resources>
