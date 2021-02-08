@@ -1,4 +1,4 @@
-package efrei.android.lab2.flickrapp;
+package efrei.android.lab2.flickrapp.task;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -8,12 +8,22 @@ import org.json.JSONObject;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
-public class AsyncFlickrJSONData extends AsyncTask<String, Void, JSONObject> {
+import efrei.android.lab2.flickrapp.JsonOperation;
+import efrei.android.lab2.flickrapp.adapter.MyAdapter;
 
+public class AsyncFlickrJSONDataForList extends AsyncTask<String, Void, JSONObject> {
     JSONObject result;
+
+    MyAdapter myAdapter;
+
+    public AsyncFlickrJSONDataForList(MyAdapter myAdapter) {
+        this.myAdapter = myAdapter;
+    }
 
     @Override
     protected JSONObject doInBackground(String... strings) {
@@ -24,10 +34,18 @@ public class AsyncFlickrJSONData extends AsyncTask<String, Void, JSONObject> {
     @Override
     protected void onPostExecute(JSONObject jsonObject) {
         super.onPostExecute(jsonObject);
-        Log.i("JFL", String.valueOf(result));
 
-        // get first image url
-        Log.i("JFL", JsonOperation.extractImageURL(0, jsonObject));
+        // add each url to the adapter
+        List<String> urls = JsonOperation.extractAllURL(jsonObject);
+        if (urls != null) {
+            urls.forEach(url -> {
+                myAdapter.add(url);
+                Log.i("JFL", "Adding to adapter url : " + url);
+            });
+            myAdapter.notifyDataSetChanged();
+
+        }
+
     }
 
     /**
@@ -55,6 +73,4 @@ public class AsyncFlickrJSONData extends AsyncTask<String, Void, JSONObject> {
         }
         return null;
     }
-
-
 }

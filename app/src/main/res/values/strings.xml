@@ -2,4 +2,7 @@
     <string name="app_name">FlickrApp</string>
     <string name="main_btn_image">Get an image</string>
     <string name="main_image_description">Image from Flickr</string>
+    <string name="main_btn_list">Go to list</string>
+    <string name="title_activity_list">ListActivity</string>
+
 </resources>

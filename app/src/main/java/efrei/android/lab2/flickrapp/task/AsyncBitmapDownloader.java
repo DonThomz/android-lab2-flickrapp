@@ -1,4 +1,4 @@
-package efrei.android.lab2.flickrapp;
+package efrei.android.lab2.flickrapp.task;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,6 +13,9 @@ import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import efrei.android.lab2.flickrapp.R;
+import efrei.android.lab2.flickrapp.activity.MainActivity;
 
 public class AsyncBitmapDownloader extends AsyncTask<String, Void, Bitmap> {
 
@@ -31,15 +34,15 @@ public class AsyncBitmapDownloader extends AsyncTask<String, Void, Bitmap> {
     @Override
     protected void onPostExecute(Bitmap bitmap) {
         super.onPostExecute(bitmap);
+
+
         if (isCancelled()){
             bitmap = null;
         }
 
-        if (imageViewWeakReference != null) {
-            ImageView imageView = imageViewWeakReference.get();
-            if (imageView != null) {
-                imageView.setImageBitmap(bitmap);
-            }
+        ImageView imageView = imageViewWeakReference.get();
+        if (imageView != null) {
+            imageView.setImageBitmap(bitmap);
         }
 
         Log.i("JSL", String.valueOf(bitmap));
@@ -47,11 +50,9 @@ public class AsyncBitmapDownloader extends AsyncTask<String, Void, Bitmap> {
 
     @Override
     protected void onPreExecute() {
-        if (imageViewWeakReference != null) {
-            ImageView imageView = imageViewWeakReference.get();
-            if (imageView != null) {
-                imageView.setImageResource(R.drawable.ic_question_mark);
-            }
+        ImageView imageView = imageViewWeakReference.get();
+        if (imageView != null) {
+            imageView.setImageResource(R.drawable.ic_question_mark);
         }
     }
 

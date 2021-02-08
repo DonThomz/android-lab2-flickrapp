@@ -9,7 +9,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class JsonOperation {
 
@@ -31,6 +34,23 @@ public class JsonOperation {
             JSONObject item = items.getJSONObject(itemNumber);
             JSONObject media = item.getJSONObject("media");
             return (String) media.get("m");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static List<String> extractAllURL(JSONObject object) {
+        try{
+            JSONArray items = object.getJSONArray("items");
+            return IntStream.range(0, items.length()).mapToObj(i -> {
+                try {
+                    return items.getJSONObject(i).getJSONObject("media").get("m").toString();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return "";
+                }
+            }).collect(Collectors.toList());
         } catch (JSONException e) {
             e.printStackTrace();
         }
