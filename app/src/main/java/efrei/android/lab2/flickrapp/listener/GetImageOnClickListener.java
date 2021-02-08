@@ -1,4 +1,4 @@
-package efrei.android.lab2.flickrapp;
+package efrei.android.lab2.flickrapp.listener;
 
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -10,6 +10,10 @@ import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.ExecutionException;
+
+import efrei.android.lab2.flickrapp.JsonOperation;
+import efrei.android.lab2.flickrapp.task.AsyncBitmapDownloader;
+import efrei.android.lab2.flickrapp.task.AsyncFlickrJSONData;
 
 public class GetImageOnClickListener implements View.OnClickListener {
 

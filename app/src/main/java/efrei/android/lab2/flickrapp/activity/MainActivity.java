@@ -1,4 +1,4 @@
-package efrei.android.lab2.flickrapp;
+package efrei.android.lab2.flickrapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import efrei.android.lab2.flickrapp.R;
+import efrei.android.lab2.flickrapp.listener.GetImageOnClickListener;
 
 public class MainActivity extends AppCompatActivity {
 
